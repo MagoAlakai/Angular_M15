@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//Models
+import { UsuarioModel } from './../../models/usuario.model';
 
 @Component({
   selector: 'app-registro',
@@ -7,10 +11,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
+  usuario:UsuarioModel;
+  public registerForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private formBuilder:FormBuilder,
+  ) {
 
-  ngOnInit() { }
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    })
 
+   }
+
+  ngOnInit() {
+
+  }
+
+  onSubmit = (form:FormGroup) =>{
+    if (form.invalid){return;};
+    console.log(form);
+    console.log(form.valid);
+    console.log(form.value);
+  }
 
 }
