@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { UsuarioModel } from './../../models/usuario.model';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -38,22 +38,25 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.authService.getToken(form.value)
           .then(res =>{
-            this.token = res;
-            console.log(res);
-            Swal.fire({
-              title: 'Correct credentials',
-              text: 'You will be redirect to your account',
-              icon: 'success',
-              confirmButtonText: 'Ok',
-            });
-            this.router.navigateByUrl('/shops');
+            //this.token = res;
+            console.log(res.token);
+            this.token = res.token;
+            this.authService.guardarToken(this.token);
+            // Swal.fire({
+            //   title: 'Correct credentials',
+            //   text: 'You will be redirect to your account',
+            //   icon: 'success',
+            //   confirmButtonText: 'Ok',
+            // });
+            //this.router.navigateByUrl('/shops');
           }).catch(err=>{
-            Swal.fire({
-              title: 'This credentials are not correct!',
-              text: err,
-              icon: 'error',
-              confirmButtonText: 'Ok',
-            });
+            console.log(err);
+            // Swal.fire({
+            //   title: 'This credentials are not correct!',
+            //   text: err,
+            //   icon: 'error',
+            //   confirmButtonText: 'Ok',
+            // });
           });
     }
   }

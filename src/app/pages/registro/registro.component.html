@@ -47,6 +47,19 @@
                         <div class="invalid-feedback">El password es obligatorio</div>
                     </div>
 
+                    <div class="wrap-input100 m-b-16" data-validate = "Password is required">
+                      <input class="input100"
+                             type="password"
+                             name="password_confirmation"
+                             formControlName='password_confirmation'
+                             minlength="8"
+                             placeholder="Password Confirmation"
+                             class="form-control"
+                             [ngClass]="{'is-invalid': registerForm.get('password_confirmation')?.touched && registerForm.get('password_confirmation')?.hasError('required')}">
+                      <span class="focus-input100"></span>
+                      <div class="invalid-feedback">La confirmación del password es obligatoria</div>
+                    </div>
+
                     <div class="flex-sb-m w-full p-t-3 p-b-24">
                         <div class="contact100-form-checkbox">
                             <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
