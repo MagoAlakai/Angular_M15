@@ -47,7 +47,6 @@ export class RegistroComponent implements OnInit {
             this.usuario = resp.user;
             console.log(resp.token);
             console.log(resp.user);
-            this.authService.guardarToken(this.token);
             this.router.navigateByUrl('/login');
           }).catch(error => console.log(error.error.errors.email[0]));
     }

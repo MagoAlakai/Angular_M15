@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.authService.getToken(form.value)
           .then(res =>{
-            //this.token = res;
+
             console.log(res.token);
             this.token = res.token;
             this.authService.guardarToken(this.token);
@@ -48,9 +48,13 @@ export class LoginComponent implements OnInit {
             //   icon: 'success',
             //   confirmButtonText: 'Ok',
             // });
-            //this.router.navigateByUrl('/shops');
+            if(this.token){
+              this.router.navigateByUrl('/home');
+            }
           }).catch(err=>{
             console.log(err);
+            alert(err.error.message);
+
             // Swal.fire({
             //   title: 'This credentials are not correct!',
             //   text: err,
