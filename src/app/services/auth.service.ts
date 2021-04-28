@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../models/usuario.model';
 
@@ -18,8 +18,12 @@ export class AuthService {
     return await this.httpClient.post(`${this.url}login`, loginUser).toPromise();
   }
 
-  logout = async() =>{
-    return;
+  getUser = async(email:string):Promise<any> =>{
+    return await this.httpClient.get(`${this.url}user/${email}`).toPromise();
+  }
+
+  logout = async(token) =>{
+    return await this.httpClient.post(`${this.url}logout`, token).toPromise();
   }
 
   register = async(form:any):Promise<any> =>{

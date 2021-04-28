@@ -5,9 +5,8 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="assets/CoolAdmin-master/index.html">
-                            <img src="assets/CoolAdmin-master/images/icon/logo.png" alt="CoolAdmin" />
-                        </a>
+
+                        <img src="assets/images/IT_logo.png" style="height: 30px; width: 130px;" alt="ITAcademy"/>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -24,63 +23,9 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="assets/CoolAdmin-master/table.html">
-                                <i class="fas fa-table"></i>Tables</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="assets/CoolAdmin-master/login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="assets/CoolAdmin-master/button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/typo.html">Typography</a>
-                                </li>
-                            </ul>
-                        </li>
+                          <a href="assets/CoolAdmin-master/table.html">
+                              <i class="fas fa-table"></i>Logout</a>
+                      </li>
                     </ul>
                 </div>
             </nav>
@@ -90,9 +35,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
-                    <img src="assets/CoolAdmin-master/images/icon/logo.png" alt="Cool Admin" />
-                </a>
+              <img src="assets/images/IT_logo.png" style="height: 40px; width: 170px;" alt="ITAcademy"/>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
@@ -102,23 +45,9 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="assets/CoolAdmin-master/table.html">
-                                <i class="fas fa-table"></i>Tables</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="assets/CoolAdmin-master/login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="assets/CoolAdmin-master/forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
+                            <form (ngSubmit)="logout()">
+                                <button type="submit"><i class="fas fa-table"></i>Logout</button>
+                            </form>
                         </li>
                     </ul>
                 </nav>
@@ -252,60 +181,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="account-wrap">
+
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             <img src="assets/CoolAdmin-master/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="assets/CoolAdmin-master/images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">john doe</a>
-                                                    </h5>
-                                                    <span class="email">johndoe@example.com</span>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
+                                            {{this.routeParamName}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
             </header>
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-            <div class="main-content">
+            <div class="main-content container">
                         <div class="row">
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <h2 class="title-1 m-b-25">Earnings By Items</h2>
                                 <div class="table-responsive table--no-card m-b-40">
                                     <table class="table table-borderless table-striped table-earning">
@@ -657,3 +553,5 @@
         </div>
 
 <!-- end document-->
+
+

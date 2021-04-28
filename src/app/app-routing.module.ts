@@ -6,10 +6,10 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  { path: 'home'    , component: HomeComponent },
-  { path: 'registro', component: RegistroComponent },
+  { path: '', component: RegistroComponent },
+  { path: 'home/:name'    , component: HomeComponent },
   { path: 'login'   , component: LoginComponent },
-  { path: '**', redirectTo: 'registro' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

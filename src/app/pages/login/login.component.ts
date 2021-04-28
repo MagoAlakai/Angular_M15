@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
   public token: any;
+  public user:any;
+  public name:string;
 
   constructor(
     private formBuilder:FormBuilder,
@@ -38,10 +40,11 @@ export class LoginComponent implements OnInit {
     if(form.valid){
       this.authService.getToken(form.value)
           .then(res =>{
-
+            console.log(res)
             console.log(res.token);
             this.token = res.token;
             this.authService.guardarToken(this.token);
+
             // Swal.fire({
             //   title: 'Correct credentials',
             //   text: 'You will be redirect to your account',
@@ -49,7 +52,14 @@ export class LoginComponent implements OnInit {
             //   confirmButtonText: 'Ok',
             // });
             if(this.token){
-              this.router.navigateByUrl('/home');
+              this.user = form.value;
+              this.authService.getUser(this.user.email)
+                  .then(resp =>{
+                    console.log(resp)
+                    console.log(resp.user[0].name);
+                    this.name = resp.user[0].name;
+                    this.router.navigateByUrl(`/home/${this.name}`);
+                  })
             }
           }).catch(err=>{
             console.log(err);
