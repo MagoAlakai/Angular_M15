@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   //FORGOT PASSWORD
-  forgotPassword = async(email:string) =>{
+  forgotPassword = async(email) =>{
     return await this.httpClient.post(`${this.url}forgot-password`, email).toPromise();
   }
 

@@ -32,15 +32,6 @@ export class ForgotPasswordComponent implements OnInit {
 
   sendPasswordMail (form:FormGroup){
     console.log(form.value);
-    let email = form.value.email;
-
-    this.authService.getUser(email)
-        .then(resp =>{
-          console.log(resp)
-          this.user = resp;
-        }).catch(err=>{
-          console.log(err);
-        });
 
     this.authService.forgotPassword(form.value)
         .then(resp =>{
