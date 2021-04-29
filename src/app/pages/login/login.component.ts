@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   public token: any;
   public user:any;
   public name:string;
+  public remindUser: boolean;
+  public email:string;
 
   constructor(
     private formBuilder:FormBuilder,
@@ -32,6 +34,15 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    // if(localStorage.getItem('email') && this.remindUser == false){
+    //   localStorage.removeItem('email');
+    // }
+
+    if(localStorage.getItem('email')){
+      this.email = localStorage.getItem('email');
+      this.remindUser = true;
+    }
   }
 
   login = (form:FormGroup) =>{
@@ -55,6 +66,13 @@ export class LoginComponent implements OnInit {
                     console.log(resp)
                     console.log(resp.user[0].name);
                     this.name = resp.user[0].name;
+
+                    if(this.remindUser){
+                      localStorage.setItem('email', this.user.email);
+                    }else{
+                      localStorage.removeItem('email');
+                    }
+
                     this.router.navigateByUrl(`/home/${this.name}`);
                   })
               Swal.fire({

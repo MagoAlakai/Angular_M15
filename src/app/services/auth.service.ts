@@ -14,14 +14,18 @@ export class AuthService {
     private httpClient: HttpClient
   ) { }
 
+  //REGISTER
+  register = async(form:any):Promise<any> =>{
+    console.log(form);
+    return await this.httpClient.post(`${this.url}register`, form).toPromise() as Promise<any>;
+  }
+
+  // LOGIN
   getToken = async(loginUser:UsuarioModel):Promise<any> =>{
     return await this.httpClient.post(`${this.url}login`, loginUser).toPromise();
   }
 
-  getUser = async(email:string):Promise<any> =>{
-    return await this.httpClient.get(`${this.url}user/${email}`).toPromise();
-  }
-
+  // LOGOUT
   logout = async(token:string) =>{
 
     const httpOptions = {
@@ -33,21 +37,28 @@ export class AuthService {
     return await this.httpClient.get(`${this.url}logout`, httpOptions).toPromise();
   }
 
-  register = async(form:any):Promise<any> =>{
-    console.log(form);
-    return await this.httpClient.post(`${this.url}register`, form).toPromise() as Promise<any>;
+  //FORGOT PASSWORD
+  forgotPassword = async(email:string) =>{
+    return await this.httpClient.post(`${this.url}forgot-password`, email).toPromise();
   }
 
-  public guardarToken (token: string){
+  //Acceder al USER Autenticado
+  getUser = async(email:string):Promise<any> =>{
+    return await this.httpClient.get(`${this.url}user/${email}`).toPromise();
+  }
+
+  //Funciones para manipular/comprobar TOKEN
+
+  guardarToken (token: string){
     this.userToken = token;
     localStorage.setItem('token', token);
   }
 
-  public eliminarToken (){
+  eliminarToken (){
     localStorage.removeItem('token');
   }
 
-  public leerToken (){
+  leerToken (){
 
     if(localStorage.getItem('token')){
       this.userToken = localStorage.getItem('token');
@@ -56,6 +67,16 @@ export class AuthService {
     }
 
     return this.userToken;
+  }
+
+  isAuthenticated ():boolean{
+    this.userToken = localStorage.getItem('token');
+    if(this.userToken == undefined){
+      return false;
+    }else{
+      return true;
+    }
+
   }
 
 }

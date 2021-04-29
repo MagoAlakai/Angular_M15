@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    //Acceder al nombre del USER a través de param de URL
     this.routeParamName = this.activatedRoute.snapshot!.paramMap.get('name');
     console.log(this.routeParamName);
   }
@@ -31,7 +33,6 @@ export class HomeComponent implements OnInit {
 
     let userToken: string = this.authService.leerToken();
     console.log(userToken);
-
     this.authService.eliminarToken();
 
     Swal.fire({
