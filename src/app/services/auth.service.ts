@@ -22,8 +22,15 @@ export class AuthService {
     return await this.httpClient.get(`${this.url}user/${email}`).toPromise();
   }
 
-  logout = async(token) =>{
-    return await this.httpClient.post(`${this.url}logout`, token).toPromise();
+  logout = async(token:string) =>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    return await this.httpClient.get(`${this.url}logout`, httpOptions).toPromise();
   }
 
   register = async(form:any):Promise<any> =>{
@@ -34,6 +41,10 @@ export class AuthService {
   public guardarToken (token: string){
     this.userToken = token;
     localStorage.setItem('token', token);
+  }
+
+  public eliminarToken (){
+    localStorage.removeItem('token');
   }
 
   public leerToken (){

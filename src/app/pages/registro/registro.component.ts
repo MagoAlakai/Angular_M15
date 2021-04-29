@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss'
+
 //Models
 import { UsuarioModel } from './../../models/usuario.model';
 
@@ -47,6 +50,12 @@ export class RegistroComponent implements OnInit {
             this.usuario = resp.user;
             console.log(resp.token);
             console.log(resp.user);
+            Swal.fire({
+              title: 'Registration successful',
+              text: 'You can now login into your account',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+            });
             this.router.navigateByUrl('/login');
           }).catch(error => console.log(error.error.errors.email[0]));
     }

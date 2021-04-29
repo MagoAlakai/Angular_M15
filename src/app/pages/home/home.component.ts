@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,12 +27,25 @@ export class HomeComponent implements OnInit {
     console.log(this.routeParamName);
   }
 
-  logout = ()=>{
+  logout() {
+
     let userToken: string = this.authService.leerToken();
     console.log(userToken);
-    localStorage.removeItem('token');
-    this.authService.logout(userToken);
-    this.router.navigateByUrl(`/login`);
+
+    this.authService.eliminarToken();
+
+    Swal.fire({
+      title: 'Thanks for coming by!',
+      text: 'We hope to see you soon',
+      icon: 'success',
+      confirmButtonText: 'Ok',
+    });
+    this.router.navigateByUrl('/login');
+    this.authService.logout(userToken)
+      .then(resp =>{
+        console.log(resp);
+      }).catch(error => console.log(error));
+
   }
 
 }
