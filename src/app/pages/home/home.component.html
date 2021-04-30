@@ -41,10 +41,6 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                       <li>
-                        <a class="js-arrow" [routerLink]="'/register'">
-                          <i class="bi bi-house-fill"></i>Home</a>
-                      </li>
-                      <li>
                         <form (ngSubmit)="logout()">
                           <button class="text-dark" type="submit"><i class="bi bi-box-arrow-left mr-3"></i>Logout</button>
                         </form>
@@ -187,7 +183,7 @@
                                             <img src="assets/CoolAdmin-master/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            {{this.routeParamName}}
+                                            {{this.user.name}}
                                         </div>
                                     </div>
                                 </div>

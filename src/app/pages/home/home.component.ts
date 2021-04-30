@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -17,35 +16,39 @@ export class HomeComponent implements OnInit {
   public user:any;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private router:Router,
     private authService:AuthService
   ) { }
 
   ngOnInit() {
 
-    //Acceder al nombre del USER a través de param de URL
-    this.routeParamName = this.activatedRoute.snapshot!.paramMap.get('name');
-    console.log(this.routeParamName);
+    //Acceder al USER a través de localStorage para ser usado en vistas
+    this.user = this.authService.leerUser();
   }
 
   logout() {
 
+    //Accedemos al token y enviamos petición ajax para logout
     let userToken: string = this.authService.leerToken();
-    console.log(userToken);
-    this.authService.eliminarToken();
+    this.authService.logout(userToken)
+      .then(resp =>{
+        console.log(resp);
+      }).catch(error => console.log(error));
 
+    //Eliminamos token y user de localStorage
+    this.authService.eliminarToken();
+    this.authService.eliminarUser();
+
+    //Alert success
     Swal.fire({
       title: 'Thanks for coming by!',
       text: 'We hope to see you soon',
       icon: 'success',
       confirmButtonText: 'Ok',
     });
+
+    //Redirigimos a vista de login
     this.router.navigateByUrl('/login');
-    this.authService.logout(userToken)
-      .then(resp =>{
-        console.log(resp);
-      }).catch(error => console.log(error));
 
   }
 

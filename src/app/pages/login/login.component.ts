@@ -35,10 +35,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    // if(localStorage.getItem('email') && this.remindUser == false){
-    //   localStorage.removeItem('email');
-    // }
-
+    //Guardar mail en LocalStorage para funcionalidad remember me
     if(localStorage.getItem('email')){
       this.email = localStorage.getItem('email');
       this.remindUser = true;
@@ -46,35 +43,36 @@ export class LoginComponent implements OnInit {
   }
 
   login = (form:FormGroup) =>{
-    if (form.invalid){return;};
-    console.log(form);
-    console.log(form.valid);
-    console.log(form.value);
 
+    //Validar form
     if(form.valid){
+
+      //Llamada Ajax para login
       this.authService.getToken(form.value)
           .then(res =>{
-            console.log(res)
-            console.log(res.token);
+
+            //Almacenamos token y user en localstorage
+            this.user = res.user;
+            this.name = res.user['name'];
             this.token = res.token;
+            this.authService.guardarUser(this.user)
             this.authService.guardarToken(this.token);
 
+            //Validación del token
             if(this.token){
-              this.user = form.value;
-              this.authService.getUser(this.user.email)
-                  .then(resp =>{
-                    console.log(resp)
-                    console.log(resp.user[0].name);
-                    this.name = resp.user[0].name;
 
-                    if(this.remindUser){
-                      localStorage.setItem('email', this.user.email);
-                    }else{
-                      localStorage.removeItem('email');
-                    }
+              //Validar opción remember me para añadir o quitar mail de localstorage
+              if(this.remindUser){
+                localStorage.setItem('email', this.user.email);
+              }else{
+                localStorage.removeItem('email');
+              }
 
-                    this.router.navigateByUrl(`/home/${this.name}`);
-                  })
+              //Entrar al dashboard personal
+              this.router.navigateByUrl(`/home`);
+
+
+              //Alert success
               Swal.fire({
                 title: 'Correct credentials',
                 text: 'You will be redirect to your account',
@@ -84,6 +82,7 @@ export class LoginComponent implements OnInit {
             }
           }).catch(err=>{
 
+            //Alert error
             Swal.fire({
               title: 'This credentials are not correct!',
               text: 'Please try again.',
@@ -91,6 +90,8 @@ export class LoginComponent implements OnInit {
               confirmButtonText: 'Ok',
             });
           });
+    }else{
+      return;
     }
   }
 

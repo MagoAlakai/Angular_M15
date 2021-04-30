@@ -8,7 +8,8 @@ import { UsuarioModel } from '../models/usuario.model';
 export class AuthService {
 
   private url:string = 'http://127.0.0.1:8000/api/';
-  userToken:string;
+  public userToken:string;
+  public user;
 
   constructor(
     private httpClient: HttpClient
@@ -69,6 +70,8 @@ export class AuthService {
     return this.userToken;
   }
 
+  //Funciones para manipular/comprobar USER
+
   isAuthenticated ():boolean{
     this.userToken = localStorage.getItem('token');
     if(this.userToken == undefined){
@@ -77,6 +80,25 @@ export class AuthService {
       return true;
     }
 
+  }
+
+  guardarUser (user: UsuarioModel){
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  eliminarUser (){
+    localStorage.removeItem('user');
+  }
+
+  leerUser (){
+
+    if(localStorage.getItem('user')){
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }else{
+      this.user = '';
+    }
+
+    return this.user;
   }
 
 }

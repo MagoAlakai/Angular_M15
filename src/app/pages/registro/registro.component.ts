@@ -40,16 +40,17 @@ export class RegistroComponent implements OnInit {
   }
 
   onSubmit = async (form:FormGroup) =>{
-    if (form.invalid){return;};
 
+    //Validar form
     if(form.valid){
+
+      //Llamada Ajax para registro
       this.authService.register(form.value)
           .then(resp => {
-            console.log(resp);
             this.token = resp.token;
             this.usuario = resp.user;
-            console.log(resp.token);
-            console.log(resp.user);
+
+            //Alert success
             Swal.fire({
               title: 'Registration successful',
               text: 'You can now login into your account',
@@ -58,6 +59,8 @@ export class RegistroComponent implements OnInit {
             });
             this.router.navigateByUrl('/login');
           }).catch(error => console.log(error.error.errors.email[0]));
+    }else{
+      return;
     }
   }
 

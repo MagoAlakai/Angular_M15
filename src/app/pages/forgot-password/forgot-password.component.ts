@@ -33,6 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
   sendPasswordMail (form:FormGroup){
     console.log(form.value);
 
+    //Llamada Ajax para enviar mail de reset password
     this.authService.forgotPassword(form.value)
         .then(resp =>{
           console.log(resp);
